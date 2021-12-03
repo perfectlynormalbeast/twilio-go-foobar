@@ -1,4 +1,4 @@
-module example/web-service-gin
+module example/twilio-go-foobar
 
 go 1.17
 
