@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      foo: web
+  template:
+    metadata:
+      labels:
+        foo: web
+    spec:
+    containers:
+      - name: bar
+        image: twilio-go-foobar
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bar
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    foo: web
+  ports:
+    - port: 5000
+      targetPort: 5000
+      nodePort: 4000

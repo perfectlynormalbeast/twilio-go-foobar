@@ -9,7 +9,7 @@ import (
 func main() {
 	router := gin.Default()
 	router.GET("/", foo)
-	router.Run()
+	router.Run(":5000")
 }
 
 func foo(c *gin.Context) {
