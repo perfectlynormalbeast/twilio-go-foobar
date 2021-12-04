@@ -4,7 +4,7 @@ metadata:
   name: foo
   namespace: default
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       foo: web
@@ -13,9 +13,10 @@ spec:
       labels:
         foo: web
     spec:
-    containers:
-      - name: bar
-        image: twilio-go-foobar
+      containers:
+        - name: foo
+          image: twilio-go-foobar
+          imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service
@@ -29,4 +30,4 @@ spec:
   ports:
     - port: 5000
       targetPort: 5000
-      nodePort: 4000
+      nodePort: 30000
