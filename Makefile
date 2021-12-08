@@ -5,10 +5,13 @@ local-run:
 	go run .
 
 docker-build:
-	docker build -t twilio-go-foobar .
+	docker build -t perfectlynormalbeast/twilio-go-foobar .
+
+docker-push:
+	docker push perfectlynormalbeast/twilio-go-foobar
 
 docker-run:
-	docker run --name foobar -it --rm -p 30000:5000 twilio-go-foobar
+	docker run --name foobar -it --rm -p 30000:5000 perfectlynormalbeast/twilio-go-foobar
 
 docker-stop:
 	docker stop foobar
