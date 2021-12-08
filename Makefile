@@ -16,8 +16,24 @@ docker-run:
 docker-stop:
 	docker stop foobar
 
-kube-deploy:
+kube-apply:
 	kubectl apply -f foobar.yaml
 
-kube-stop:
+kube-delete:
 	kubectl delete -f foobar.yaml
+
+eks-create-cluster:
+	eksctl create cluster --name tweek --without-nodegroup
+
+eks-create-nodegroup:
+	eksctl create nodegroup \
+      --cluster tweek \
+      --region $AWS_REGION \
+      --name tweek-nodegroup \
+      --node-type t3.micro \
+      --nodes 2 \
+      --nodes-min 1 \
+      --nodes-max 3
+
+eks-delete:
+	eksctl delete cluster --name tweek
