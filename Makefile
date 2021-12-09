@@ -28,7 +28,7 @@ eks-create-cluster:
 eks-create-nodegroup:
 	eksctl create nodegroup \
       --cluster tweek \
-      --region $AWS_REGION \
+      --region ${AWS_REGION} \
       --name tweek-nodegroup \
       --node-type t3.micro \
       --nodes 2 \
@@ -37,3 +37,9 @@ eks-create-nodegroup:
 
 eks-delete:
 	eksctl delete cluster --name tweek
+
+twilio-config:
+	$(eval HOSTNAME := $(shell kubectl get services bar --output jsonpath='{.status.loadBalancer.ingress[0].hostname}'))
+	@curl -X POST https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/IncomingPhoneNumbers/${TWILIO_PHONE_NUMBER_SID}.json \
+    --data-urlencode "SmsUrl=http://$(HOSTNAME)" \
+    -u ${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}
