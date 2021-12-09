@@ -13,6 +13,6 @@ func main() {
 }
 
 func foo(c *gin.Context) {
-	c.Header("Content-Type","application/xml")
+	c.Header("Content-Type", "application/xml")
 	c.String(http.StatusOK, "<Response><Message>bar</Message></Response>")
 }
